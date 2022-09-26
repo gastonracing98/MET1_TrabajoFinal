@@ -5,15 +5,7 @@ using System.Collections;
 
 namespace MET1_CLASS1_INTERFACES
 {
-    //CREAR INTERFACE
-    //1)
-    public interface IComparable
-    {
-        //declaro los metodos
-        bool sosIgual(IComparable c);
-        bool sosMenor(IComparable c);
-        bool sosMayor(IComparable c);
-    }
+  
     // 2)
     public class Numero : IComparable
     {
@@ -41,15 +33,7 @@ namespace MET1_CLASS1_INTERFACES
             return this.valor > ((Numero)c).getValor();
         }
     }
-    //3
-    public interface IColeccionable
-    {
-        int cuantos(); //cuantos comparables hay
-        IComparable minimo();
-        IComparable maximo();
-        void agregar(IComparable c);
-        bool contiene(IComparable c);
-    }
+ 
 
     //4
     public class Cola : IColeccionable, Iterable
