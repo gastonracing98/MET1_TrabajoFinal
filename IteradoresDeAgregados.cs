@@ -62,7 +62,6 @@ namespace MET1_CLASS1_INTERFACES
         {
             return elementos[indice];
         }
-
     }
     public class IteradorDeCola : Iterador
     {
@@ -70,6 +69,65 @@ namespace MET1_CLASS1_INTERFACES
         private int indice;
         public IteradorDeCola(List<IComparable> l)
         {
+            elementos = l.ConvertAll(x => (iterado)x);
+            //elementos = l;
+            indice = 0;
+        }
+        public void primero()
+        {
+            indice = 0;
+        }
+        public void siguiente()
+        {
+            indice++;
+        }
+        public bool fin()
+        {
+            return indice == elementos.Count;
+        }
+        public iterado actual()
+        {
+            return elementos[indice];
+        }
+
+    }
+    //3.11.1
+    public class IteradorDeGerente : Iterador
+    {
+        private List<iterado> elementos;
+        private int indice;
+        public IteradorDeGerente(List<IComparable> l)
+        {
+            //utilizar iterado para los elementos de la lista
+            elementos = l.ConvertAll(x => (iterado)x);
+            //elementos = l;
+            indice = 0;
+        }
+        public void primero()
+        {
+            indice = 0;
+        }
+        public void siguiente()
+        {
+            indice++;
+        }
+        public bool fin()
+        {
+            return indice == elementos.Count;
+        }
+        public iterado actual()
+        {
+            return elementos[indice];
+        }
+
+    }
+    public class IteradorDeConjunto : Iterador
+    {
+        private List<iterado> elementos;
+        private int indice;
+        public IteradorDeConjunto(List<IComparable> l)
+        {
+            //utilizar iterado para los elementos de la lista
             elementos = l.ConvertAll(x => (iterado)x);
             //elementos = l;
             indice = 0;

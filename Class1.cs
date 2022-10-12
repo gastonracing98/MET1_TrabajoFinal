@@ -33,8 +33,6 @@ namespace MET1_CLASS1_INTERFACES
             return this.valor > ((Numero)c).getValor();
         }
     }
- 
-
     //4
     public class Cola : IColeccionable, Iterable
     {
@@ -102,7 +100,7 @@ namespace MET1_CLASS1_INTERFACES
         }
         
     }
-    public class Pila : IColeccionable, Iterable //vemos como se soluciona esto... creo que en la clase 3
+    public class Pila : IColeccionable, Iterable 
     {
         //clase2 ==> crear el iterador
         private List<IComparable> elementos;
@@ -230,7 +228,7 @@ namespace MET1_CLASS1_INTERFACES
         }
     }
     // 11
-    public class Persona : IComparable,iterado
+    public class Persona : ObservadoAbstacto,IComparable, iterado 
     {
         private string nombre;
         private int dni;

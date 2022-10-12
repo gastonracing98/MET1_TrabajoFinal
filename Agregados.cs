@@ -11,7 +11,7 @@ namespace MET1_CLASS1_INTERFACES
  
     //2.3
     //Implementar la clase conjunto... 
-    public class Conjunto : IColeccionable
+    public class Conjunto : IColeccionable, Iterable
     {
         //si se intenta almacenar un elemento que ya está en el conjunto, éste
         //elemento no se almacena ya que sino estaría repetido.
@@ -55,6 +55,10 @@ namespace MET1_CLASS1_INTERFACES
                     return true;
             return false;
         }
+        public Iterador getIterador()
+        {
+            return new IteradorDeConjunto(elementos);
+        }
         //metodo eliminar
     }
     //2.4 
@@ -93,9 +97,8 @@ namespace MET1_CLASS1_INTERFACES
 
         public class Diccionario : IColeccionable , Iterable
         {
-            //si se intenta almacenar un elemento que ya está en el conjunto, éste
-            //elemento no se almacena ya que sino estaría repetido.
-            List<IComparable> elementos = new List<IComparable>();
+            
+            List<IComparable> elementos;
             public Diccionario()
             {
                 elementos = new List<IComparable>();

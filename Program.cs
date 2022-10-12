@@ -6,7 +6,7 @@ namespace MET1_CLASS1_INTERFACES
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Mainl(string[] args)
         {
 
            // Numero A = new Numero(2);
@@ -42,43 +42,36 @@ namespace MET1_CLASS1_INTERFACES
             EstrategiaPorDni e3 = new EstrategiaPorDni();
 
             IColeccionable pila = new Pila();
-            llenarAlumnos(pila);
+            //Llenar(pila,);
             cambiarEstrategia((Iterable)pila,e);
-            informar(pila);
+            informar(pila,1);
             cambiarEstrategia((Iterable)pila,e1);
-            informar(pila);
+            informar(pila,1);
             cambiarEstrategia((Iterable)pila,e2);
-            informar(pila);
+            informar(pila,1);
             cambiarEstrategia((Iterable)pila,e3);
-            informar(pila);
+            informar(pila,1);
         }
         // 5)
-        public static void Llenar(IColeccionable C)
-        {
-            Random randomUnicoDeInstancia = new Random();
-            for (int i = 0;i<20; i++)
-            {
-               
-                C.agregar(new Numero(randomUnicoDeInstancia.Next(100)));
-
+        //CLASE 3 EJERCICIO 6
+        public static void Llenar(IColeccionable C, int opcion){
+            for (int i = 0;i<20; i++){
+                C.agregar(FabricaDeComparables.crearComparable(opcion));
             }
            // return C;
-
         }
-        
-        // 6
-        public static void informar(IColeccionable c)
+
+        // 6//CLASE 3 EJERCICIO 6
+        public static void informar(IColeccionable c, int opcion)
         {
             Console.WriteLine(c.cuantos().ToString());
-            Console.WriteLine(c.minimo());
-            Console.WriteLine(c.maximo());
+            Console.WriteLine(c.minimo().ToString());
+            Console.WriteLine(c.maximo().ToString());
             Console.WriteLine();
-            Console.WriteLine("Ingrese valor: ");
-            int var = int.Parse(Console.ReadLine());
-            IComparable a = new Numero(var);
-            if (c.contiene(a))
-            {
-                Console.WriteLine("!El elemento esta ene la coleccion!");
+
+            IComparable a = FabricaDeComparables.crearComparable(opcion);
+            if (c.contiene(a)){
+                Console.WriteLine("!El elemento esta en la coleccion!");
             }
             else
             {
@@ -86,14 +79,12 @@ namespace MET1_CLASS1_INTERFACES
             }
         }
         // 7
-        static void Mainw(string[] args) 
-        {
+        static void Main(string[] args){
             //7
-            
             IColeccionable cola = new Cola();
             IColeccionable pila = new Pila();
             //9{
-            ColeccionMultiple multiple = new ColeccionMultiple((Pila)pila, (Cola)cola);
+            //ColeccionMultiple multiple = new ColeccionMultiple((Pila)pila, (Cola)cola);
             //}
             //Llenar(pila);
             //Llenar(cola);
@@ -103,37 +94,59 @@ namespace MET1_CLASS1_INTERFACES
             ///
             //llenarPersonas(pila);
             //llenarPersonas(cola);
-            llenarAlumnos(pila);
-            llenarAlumnos(cola);
-            informar(cola);
-            
-        }
-        // 12
-        public static void llenarPersonas(IColeccionable c)
-        {
-            string[] lista = new string[32] { "Cecilia Giner Ballesteros", "Chucho Serrano Puyol", "Cruz Catalán Rosselló", "Fidel del Solana", "Bruno Giménez Borja", "Estefanía Bermudez Quiroga", "Dora Redondo Vives", "Lilia Tudela Leiva", "Adelardo Marino Manjón", "Pedro", "Maura Amaya Piquer", " Manuel", "Abraham Elpidio Cáceres, Asensio", "Valeria Alcolea Esteban", "Amancio Iniesta-Linares", "Amaro Balaguer Flores", "Plácido Hoyos-Cordero", "Graciana Morante Crespi", "Ciríaco Torrens Cornejo", "Dorotea Vidal", "Trinidad de Badía", "Timoteo de Isern", "Óscar de Parejo", "Maximino Montaña Blanch", "Teodosio del Bernal", "María Del Carmen Aguilar", "Lupe Guillén Barreda", "Rómulo de Arribas", "Josep Espiridión Delgado Aguilera", "Américo Emigdio Muro Sanmiguel", "María Macías", "Alexandra Cánovas Bru" };
+            //llenarAlumnos(pila);
+            //llenarAlumnos(cola);
+            //Llenar(cola, 4);
+            //Console.WriteLine("Que desea comparar: \n");
+            //Console.WriteLine("Ingrese: ");
+            //Console.WriteLine("'2' PARA COMPARAR ALUMNOS.");
+            //Console.WriteLine("'3' PARA COMPARAR PERSONAS.");
+            //Console.WriteLine("'1' PARA COMPARAR NUMEROS.");
+            //Console.WriteLine("'4' PARA COMPARAR VENDEDORES.");
+               
+            //int opcion = int.Parse(Console.ReadLine());
+            //informar(cola,opcion);
+            //CLASE 3 EJERCICIO 14
+
+            Gerente gerente = new Gerente();
+            Iterable coleccion = new Cola();
+
+            Llenar((IColeccionable)coleccion, 4);
+
+            Iterador i = coleccion.getIterador();
+            while (!i.fin()){
+                iterado c = i.actual();
+                ((IObservado)c).agregarObservador(gerente);
+                i.siguiente();
+            }
+            jornadaDeVentas(coleccion);
+            gerente.cerrar();
            
-            Random random = new Random();
-            for (int i = 0; i<20; i++)
-            {
-                c.agregar(new Persona(lista[random.Next(0, 32)], random.Next(11111111, 99999999)));
 
-            }
+            
 
-        }
+            //
+            
+        }   
+        // 12
+        //public static void llenarPersonas(IColeccionable c){
+        //    string[] lista = new string[32] { "Cecilia Giner Ballesteros", "Chucho Serrano Puyol", "Cruz Catalán Rosselló", "Fidel del Solana", "Bruno Giménez Borja", "Estefanía Bermudez Quiroga", "Dora Redondo Vives", "Lilia Tudela Leiva", "Adelardo Marino Manjón", "Pedro", "Maura Amaya Piquer", " Manuel", "Abraham Elpidio Cáceres, Asensio", "Valeria Alcolea Esteban", "Amancio Iniesta-Linares", "Amaro Balaguer Flores", "Plácido Hoyos-Cordero", "Graciana Morante Crespi", "Ciríaco Torrens Cornejo", "Dorotea Vidal", "Trinidad de Badía", "Timoteo de Isern", "Óscar de Parejo", "Maximino Montaña Blanch", "Teodosio del Bernal", "María Del Carmen Aguilar", "Lupe Guillén Barreda", "Rómulo de Arribas", "Josep Espiridión Delgado Aguilera", "Américo Emigdio Muro Sanmiguel", "María Macías", "Alexandra Cánovas Bru" };
+        //    Random random = new Random();
+        //    for (int i = 0; i<20; i++){
+        //        c.agregar(new Persona(lista[random.Next(0, 32)], random.Next(11111111, 99999999)));
+        //    }
+
+        //}
         //16
-        public static void llenarAlumnos(IColeccionable c)
-        {
-            string[] lista = new string[32] { "Cecilia Giner Ballesteros", "Chucho Serrano Puyol", "Cruz Catalán Rosselló", "Fidel del Solana", "Bruno Giménez Borja", "Estefanía Bermudez Quiroga", "Dora Redondo Vives", "Lilia Tudela Leiva", "Adelardo Marino Manjón", "Pedro", "Maura Amaya Piquer", " Manuel", "Abraham Elpidio Cáceres, Asensio", "Valeria Alcolea Esteban", "Amancio Iniesta-Linares", "Amaro Balaguer Flores", "Plácido Hoyos-Cordero", "Graciana Morante Crespi", "Ciríaco Torrens Cornejo", "Dorotea Vidal", "Trinidad de Badía", "Timoteo de Isern", "Óscar de Parejo", "Maximino Montaña Blanch", "Teodosio del Bernal", "María Del Carmen Aguilar", "Lupe Guillén Barreda", "Rómulo de Arribas", "Josep Espiridión Delgado Aguilera", "Américo Emigdio Muro Sanmiguel", "María Macías", "Alexandra Cánovas Bru" };
-
-            Random random = new Random();
-            for (int i = 0; i < 20; i++)
-            {
-                c.agregar(new Alumno(lista[random.Next(0, 32)], random.Next(11111111, 99999999),random.Next(1111111,9999999),random.NextDouble()));
-                
-
-            }
-        }
+        //public static void llenarAlumnos(IColeccionable c)
+        //{
+        //    string[] lista = new string[32] { "Cecilia Giner Ballesteros", "Chucho Serrano Puyol", "Cruz Catalán Rosselló", "Fidel del Solana", "Bruno Giménez Borja", "Estefanía Bermudez Quiroga", "Dora Redondo Vives", "Lilia Tudela Leiva", "Adelardo Marino Manjón", "Pedro", "Maura Amaya Piquer", " Manuel", "Abraham Elpidio Cáceres, Asensio", "Valeria Alcolea Esteban", "Amancio Iniesta-Linares", "Amaro Balaguer Flores", "Plácido Hoyos-Cordero", "Graciana Morante Crespi", "Ciríaco Torrens Cornejo", "Dorotea Vidal", "Trinidad de Badía", "Timoteo de Isern", "Óscar de Parejo", "Maximino Montaña Blanch", "Teodosio del Bernal", "María Del Carmen Aguilar", "Lupe Guillén Barreda", "Rómulo de Arribas", "Josep Espiridión Delgado Aguilera", "Américo Emigdio Muro Sanmiguel", "María Macías", "Alexandra Cánovas Bru" };
+        //    int opcion = 1;
+        //    Random random = new Random();
+        //    for (int i = 0; i < 20; i++){
+        //        c.agregar(FabricaDeComparables.crearComparable(opcion)) ;
+        //    }
+        //}
         //2.7 
         public static void imprimirElementos(Iterable col)
         {
@@ -160,6 +173,21 @@ namespace MET1_CLASS1_INTERFACES
                 ite.siguiente();
             }
 
+        }
+        //CLASE 3 EJERCICIO 13
+        public static void jornadaDeVentas(Iterable coleccion_vendedores)//vendedores
+        {
+            Vendedor a;
+            Iterador ite = coleccion_vendedores.getIterador();//creo el iterador del coleccionable 
+            for (int i = 0; i < 20; i++)
+            {
+                Random r = new Random();
+                double monto = (double) r.Next(5000,7000);
+                a = (Vendedor)ite.actual();
+                a.venta(monto);
+                ite.siguiente();
+
+            }
         }
 
 
