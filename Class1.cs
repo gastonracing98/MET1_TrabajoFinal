@@ -262,19 +262,23 @@ namespace MET1_CLASS1_INTERFACES
 
     }
     //15
-    class Alumno : Persona
+    public class Alumno : Persona, IAlumno
     {
         //3°creo la composición
-        private EstrategiaDeComparacion estrategia = null;
+        EstrategiaDeComparacion estrategia = null;
         private int legajo;
         double promedio;
+
+        //Practica 4, EJERCICIO 1
+        private int calificacion;
+
        
         public Alumno(string n, int d, int l, double p) : base(n, d)
         {
             //4° Crear una estrategia por defecto
             this.legajo = l;
             this.promedio = p;
-            setEstrategia(new EstrategiaPorDni());// == estrategia = new EstrategiaPorDni();
+            setEstrategia(new EstrategiaPorNombre());// == estrategia = new EstrategiaPorDni();
             //1setEstrategia(new EstrategiaPorLegajo());
             //estrategia = new EstrategiaPorLegajo();
             //estrategia = new EstrategiaPorDni();
@@ -292,6 +296,25 @@ namespace MET1_CLASS1_INTERFACES
                 return promedio;
             }
         }
+        //Practica 4, EJERCICIO 1
+        public int GetSetCalificacion
+        {
+            get { return this.calificacion; }
+            set { this.calificacion = value; }
+        } 
+        
+
+        public virtual int responderPregunta(int pregunta)
+        {
+            Random r = new Random();
+            return r.Next(1,3);
+        }
+        public string mostrarCalificacion()
+        {
+            string str = getNombre +" " + GetSetCalificacion.ToString() ;
+            return str;
+        }
+
         //18
         public bool sosIgual(IComparable c)
         {   //5° delegar 
@@ -309,5 +332,34 @@ namespace MET1_CLASS1_INTERFACES
         {
             estrategia = e;
         }
+        public Alumno GetAlumno()
+        {
+            return this;
+        }
+        public string Calificacion()
+        {
+            return mostrarCalificacion();
+        }
+        public int getCalificacion()
+        {
+            return GetSetCalificacion;
+        }
+        
+
     }
+    //Practica 4, EJERCICIO 2
+    public class AlumnoMuyEstudioso:Alumno
+    {
+        
+        public AlumnoMuyEstudioso(string nom, int dni, int leg, double promedio) : base(nom,dni,leg,promedio)
+        {
+
+        }
+        public override int responderPregunta(int pregunta)
+        {
+            return pregunta % 3;
+        }
+        
+    }
+
 }

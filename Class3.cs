@@ -51,11 +51,14 @@ namespace MET1_CLASS1_INTERFACES
         static public IComparable crearComparable(int opcion)
         {
             FabricaDeComparables fabrica = null;
-            switch (opcion){
+            switch (opcion)
+            {
                 case 1: fabrica = new FabricaDeNumeros();break;
                 case 2: fabrica = new FabricaDeAlumnos();break;
                 case 3: fabrica = new FabricaDePersonas();break;
                 case 4: fabrica = new FabricaDeVendedores();break;
+                //case 5: fabrica = new StudentFactory();break;
+                   
             }
             return fabrica.crearPorTeclado();
         }

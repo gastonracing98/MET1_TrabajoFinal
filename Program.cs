@@ -79,7 +79,7 @@ namespace MET1_CLASS1_INTERFACES
             }
         }
         // 7
-        static void Main(string[] args){
+        static void Main2(string[] args){
             //7
             IColeccionable cola = new Cola();
             IColeccionable pila = new Pila();
@@ -110,9 +110,7 @@ namespace MET1_CLASS1_INTERFACES
 
             Gerente gerente = new Gerente();
             Iterable coleccion = new Cola();
-
             Llenar((IColeccionable)coleccion, 4);
-
             Iterador i = coleccion.getIterador();
             while (!i.fin()){
                 iterado c = i.actual();
@@ -128,6 +126,7 @@ namespace MET1_CLASS1_INTERFACES
             //
             
         }   
+
         // 12
         //public static void llenarPersonas(IColeccionable c){
         //    string[] lista = new string[32] { "Cecilia Giner Ballesteros", "Chucho Serrano Puyol", "Cruz Catalán Rosselló", "Fidel del Solana", "Bruno Giménez Borja", "Estefanía Bermudez Quiroga", "Dora Redondo Vives", "Lilia Tudela Leiva", "Adelardo Marino Manjón", "Pedro", "Maura Amaya Piquer", " Manuel", "Abraham Elpidio Cáceres, Asensio", "Valeria Alcolea Esteban", "Amancio Iniesta-Linares", "Amaro Balaguer Flores", "Plácido Hoyos-Cordero", "Graciana Morante Crespi", "Ciríaco Torrens Cornejo", "Dorotea Vidal", "Trinidad de Badía", "Timoteo de Isern", "Óscar de Parejo", "Maximino Montaña Blanch", "Teodosio del Bernal", "María Del Carmen Aguilar", "Lupe Guillén Barreda", "Rómulo de Arribas", "Josep Espiridión Delgado Aguilera", "Américo Emigdio Muro Sanmiguel", "María Macías", "Alexandra Cánovas Bru" };
@@ -189,9 +188,65 @@ namespace MET1_CLASS1_INTERFACES
 
             }
         }
+        static void Main(string[] args)
+        {
+            Random r = new Random();
+            string[] lista = new string[32] { "Cecilia Giner Ballesteros", "Chucho Serrano Puyol", "Cruz Catalán Rosselló", "Fidel del Solana", "Bruno Giménez Borja", "Estefanía Bermudez Quiroga", "Dora Redondo Vives", "Lilia Tudela Leiva", "Adelardo Marino Manjón", "Pedro", "Maura Amaya Piquer", " Manuel", "Abraham Elpidio Cáceres, Asensio", "Valeria Alcolea Esteban", "Amancio Iniesta-Linares", "Amaro Balaguer Flores", "Plácido Hoyos-Cordero", "Graciana Morante Crespi", "Ciríaco Torrens Cornejo", "Dorotea Vidal", "Trinidad de Badía", "Timoteo de Isern", "Óscar de Parejo", "Maximino Montaña Blanch", "Teodosio del Bernal", "María Del Carmen Aguilar", "Lupe Guillén Barreda", "Rómulo de Arribas", "Josep Espiridión Delgado Aguilera", "Américo Emigdio Muro Sanmiguel", "María Macías", "Alexandra Cánovas Bru" };
+           // Teacher teacher = new Teacher();
+            ListOfStudent.Teacher teacher = new ListOfStudent.Teacher();
+            
+            List<IAlumno> LISTA = new List<IAlumno>(); //hago esta lista aux para poder recorrer los decorados de la lista e imprimir cada decorado
+            
+            for (int i = 0; i < 10; i++) {
+               Alumno a = new Alumno(lista[r.Next(0,31)],r.Next(11111111,99999999),r.Next(111,9999999),r.Next(0,10));
+                Student ALU = new AlumnoAdapter(a);
+                IAlumno alu = new CalificacionAlumnoConAsteriscos(a);
+                AlumnoMuyEstudioso a2 = new AlumnoMuyEstudioso(lista[r.Next(0, 31)], r.Next(11111111, 99999999), r.Next(111, 9999999), r.Next(0, 10));
+                Student ALU2 = new AlumnoAdapter(a2);
+                IAlumno alu2 = new CalificacionAlumnoConAsteriscos(a2);
+                LISTA.Add(alu);
+                LISTA.Add(alu2);
+                //Student student = new AlumnoAdapter(a);//DecoradorAlumno 
+                //Student student1 = new AlumnoAdapter(a2);
+                //Student student = alu;
+                //Student student1 = alu2;
+
+
+                teacher.goToClass(ALU); //
+                teacher.goToClass(ALU2);
+                
+                //Console.WriteLine(alu.Calificacion());
+            }
+            teacher.teachingAClass();
+
+            for (int i = 0; i < 20; i++)
+            {
+                Console.WriteLine(LISTA[i].Calificacion());
+            }
+            //Alumno ALUMNO = CrearDecoradorConLetraYPromocion(a);
+            //Console.WriteLine(ALUMNO.Calificacion());
+            //
 
 
 
+        }
+        //public static IAlumno crearStudent()
+        //{//creo un comparable y lo convierto en un adpter, le paso como parametro un 'Alumno'
+        //    IAlumno IA = ((IAlumno)FabricaDeComparables.crearComparable(2));
+        //    return new AlumnoAdapter((Alumno)IA);
+            
+        //}
+        //public static IAlumno crearDecoradorConLetra()
+        //{
+        //    IAlumno IA = crearStudent();
+        //    return new CalificacionAlumnoConLetras(IA);//le tengo que pasar la calificación al decorador
+        //}
+        //public static IAlumno CrearDecoradorConLetraYPromocion() 
+        //{
+        //    IAlumno IA = crearDecoradorConLetra();
+        //    return new CalificacionAlumnoConPromocion(IA);
+        //}
+        //crear funcion con asteriscos
     }
 }
 
